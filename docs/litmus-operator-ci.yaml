@@ -182,7 +182,7 @@ spec:
               type: string
             engineState:
               type: string
-              pattern: ^(active|stop|initialized|stopped)$
+              pattern: ^(active|stop)$
             chaosServiceAccount:
               type: string
             components:
@@ -221,6 +221,8 @@ spec:
                         type: array
                         items:
                           type: object
+                          required:
+                            - runProperties
                           properties:
                             name:
                               type: string
@@ -272,6 +274,9 @@ spec:
                                 url:
                                   type: string
                                   minLength: 1
+                                insecureSkipVerify:
+                                  type: boolean
+                                  minLength: 1
                                 expectedResponseCode:
                                   type: string
                                   minLength: 1
@@ -293,6 +298,11 @@ spec:
                                       type: string
                             runProperties:
                               type: object
+                              minProperties: 3
+                              required:
+                                - probeTimeout
+                                - interval
+                                - retry
                               properties:
                                 probeTimeout:
                                   type: integer
